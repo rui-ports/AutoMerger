@@ -1,0 +1,40 @@
+name: Merge Action
+
+on: [push]
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+       - name: Checkout
+         uses: actions/checkout@master
+
+       - name: Save more space
+         run: |
+              sudo apt-get remove -y '^ghc-8.*' '^dotnet-.*' '^llvm-.*' 'php.*' azure-cli google-cloud-sdk '^google-.*' hhvm google-chrome-stable firefox '^firefox-.*' powershell mono-devel '^account-plugin-.*' account-plugin-facebook account-plugin-flickr account-plugin-jabber account-plugin-salut account-plugin-twitter account-plugin-windows-live account-plugin-yahoo aisleriot brltty duplicity empathy empathy-common example-content gnome-accessibility-themes gnome-contacts gnome-mahjongg gnome-mines gnome-orca gnome-screensaver gnome-sudoku gnome-video-effects gnomine landscape-common libreoffice-avmedia-backend-gstreamer libreoffice-base-core libreoffice-calc libreoffice-common libreoffice-core libreoffice-draw libreoffice-gnome libreoffice-gtk libreoffice-impress libreoffice-math libreoffice-ogltrans libreoffice-pdfimport libreoffice-style-galaxy libreoffice-style-human libreoffice-writer libsane libsane-common mcp-account-manager-uoa python3-uno rhythmbox rhythmbox-plugins rhythmbox-plugin-zeitgeist sane-utils shotwell shotwell-common telepathy-gabble telepathy-haze telepathy-idle telepathy-indicator telepathy-logger telepathy-mission-control-5 telepathy-salut totem totem-common totem-plugins printer-driver-brlaser printer-driver-foo2zjs printer-driver-foo2zjs-common printer-driver-m2300w printer-driver-ptouch printer-driver-splix
+              sudo rm -rf "/usr/local/share/boost"
+              sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+              sudo swapoff -av
+              sudo rm -rf /mnt/swapfile
+
+       - name: Make a initial setup
+         run: |
+              sudo -E apt-get -qq update
+              # Dump command
+              sudo -E apt-get -qq install unace unrar python3-dev python3-pip python3-venv python3-wheel zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj curl cabextract rename liblzma-dev python-pip brotli liblz4-tool python-setuptools python3-setuptools unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack arj cabextract file-roller device-tree-compiler liblzma-dev python-pip brotli liblz4-tool gawk aria2 rename python3-setuptools -y -y
+              pip install backports.lzma protobuf pycrypto wheel setuptools
+              pip3 install -U wheel --user
+              pip install -U wheel --user
+              pip3 install backports.lzma protobuf pycrypto wheel setuptools
+              curl -sL https://git.io/file-transfer | sh
+
+       - name: Now -> Time To Merge
+         run: |
+              curl -sL https://git.io/file-transfer | sh
+              git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
+              cd S_*; mv ../transfer .
+              sudo wget 'https://dlcdnets.asus.com/pub/ASUS/ZenFone/ZS661KS/UL-ASUS_I003_1-CN-17.0823.2009.98-1.1.74-user.zip' -O zip.zip > /dev/null 2>&1
+              sudo bash merger.sh "$(pwd)/zip.zip"
+              sudo chmod 0644 system.img.zip
+              ./transfer wet "$(pwd)/system.img.zip"
