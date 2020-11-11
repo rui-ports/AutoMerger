@@ -32,10 +32,10 @@ jobs:
          run: |
               git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
               cd S_*
-              sudo wget 'https://versaweb.dl.sourceforge.net/project/derpfest//surya/DerpFest-11-Official-Alpha-surya-20201111.zip' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://dl.google.com/developers/android/rvc/images/factory/coral-rpb3.200720.005-factory-13069eef.zip' -O zip.zip > /dev/null 2>&1
               sudo bash merger.sh "$(pwd)/zip.zip"
               sudo chmod 0644 system.img.zip
-              mv system.img.zip DerpFest-11-OFC.zip
+              mv system.img.zip P4XL.zip
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -45,7 +45,7 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put DerpFest-11-OFC.zip\r\"
+              send \"put P4XL.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
