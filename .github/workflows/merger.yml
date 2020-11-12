@@ -52,7 +52,7 @@ jobs:
               git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'http://otafsg-cost-az.coloros.com/OnePlus8Pro_EEA/OnePlus8ProOxygen_15.E.31_GLO_0310_2011010124/patch/amazone2/GLO/OnePlus8ProOxygen/OnePlus8ProOxygen_15.E.31_GLO_0310_2011010124/OnePlus8ProOxygen_15.E.31_OTA_0310_all_2011010124_d85208.zip' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://www.googleapis.com/drive/v3/files/1mSf9WafqyGiguty7llDVMY6u8KKaHOXY?alt=media&key=AIzaSyAPeiAtskDMGvYJqAUb00tTQ3P90ER-LP8' -O zip.zip > /dev/null 2>&1
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
               sudo bash merger.sh "$(pwd)/zip.zip"
 
@@ -64,7 +64,7 @@ jobs:
               fi
 
               sudo chmod 0644 system.img.zip
-              mv system.img.zip OP8Pro-EEA.zip
+              mv system.img.zip AICP-v15.zip
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -74,10 +74,10 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put OP8Pro-EEA.zip\r\"
+              send \"put AICP-v15.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
               send \"bye\r\"
               interact"
-              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/), wait a few minutes for the file to appear!"
+              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/AICP-v15.zip/download), wait a few minutes for the file to appear!"
