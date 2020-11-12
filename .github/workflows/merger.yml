@@ -2,7 +2,7 @@ name: Merge Action
 
 on: [push]
 env:
-   INPUT: "OxygenOS"
+   INPUT: "AICP"
 
 jobs:
   build:
