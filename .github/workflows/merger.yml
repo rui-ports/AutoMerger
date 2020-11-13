@@ -2,7 +2,7 @@ name: Merge Action
 
 on: [push]
 env:
-   INPUT: "OnePlus 8 (HydrogenOS)"
+   INPUT: "MIUI 20.11.12"
 
 jobs:
   build:
@@ -53,7 +53,7 @@ jobs:
               git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'http://otafsc-cost.h2os.com/OnePlus8_CH/OnePlus8Hydrogen_15.H.31_0310_2010291924/patch/CHN/OnePlus8Hydrogen/OnePlus8Hydrogen_15.H.31_0310_2010291924/OnePlus8Hydrogen_15.H.31_OTA_0310_all_2010291924_a60b7994b0.zip' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://bigota.d.miui.com/20.11.12/miui_CMI_20.11.12_241f432d92_11.0.zip' -O zip.zip > /dev/null 2>&1
               
               if [ -f "$(pwd)/zip.zip" ]; then
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
@@ -71,7 +71,7 @@ jobs:
               fi
 
               sudo chmod 0644 system.img.zip
-              mv system.img.zip OPHydro-8.zip
+              mv system.img.zip MIUI.bin
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -81,10 +81,10 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put OPHydro-8.zip\r\"
+              send \"put MIUI.bin\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
               send \"bye\r\"
               interact"
-              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/OPHydro-8.zip/download), wait a few minutes for the file to appear!"
+              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/MIUI.bin/download), wait a few minutes for the file to appear!"
