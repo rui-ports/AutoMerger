@@ -2,7 +2,7 @@ name: Merge Action
 
 on: [push]
 env:
-   INPUT: "OnePlus 7T Pro"
+   INPUT: "OnePlus 8 (HydrogenOS)"
 
 jobs:
   build:
