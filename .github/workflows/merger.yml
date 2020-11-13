@@ -47,14 +47,21 @@ jobs:
               pip3 install backports.lzma protobuf pycrypto wheel setuptools
 
        - name: Now -> Time To Merge
+         continue-on-error: true
          run: |
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Cloning the repository..."
               git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'https://oxygenos.oneplus.net/OnePlus7TProOxygen_13.W.09_OTA_009_all_2010191130_80341ab526be4194.zip' -O zip.zip > /dev/null 2>&1
-              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
-              sudo bash merger.sh "$(pwd)/zip.zip"
+              sudo wget 'http://otafsc-cost.h2os.com/OnePlus8_CH/OnePlus8Hydrogen_15.H.31_0310_2010291924/patch/CHN/OnePlus8Hydrogen/OnePlus8Hydrogen_15.H.31_0310_2010291924/OnePlus8Hydrogen_15.H.31_OTA_0310_all_2010291924_a60b7994b0.zip' -O zip.zip > /dev/null 2>&1
+              
+              if [ -f "$(pwd)/zip.zip" ]; then
+                  ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
+                  sudo bash merger.sh "$(pwd)/zip.zip"
+              else
+                  ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: The firmware/ROM file was not found"
+                  exit 1
+              fi
 
               if [ -f "$(pwd)/system.img.zip" ]; then
                  ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merge done! Uploading..."
@@ -64,7 +71,7 @@ jobs:
               fi
 
               sudo chmod 0644 system.img.zip
-              mv system.img.zip OP7Pro-ALL.zip
+              mv system.img.zip OPHydro-8.zip
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -74,10 +81,10 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put OP7Pro-ALL.zip\r\"
+              send \"put OPHydro-8.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
               send \"bye\r\"
               interact"
-              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/OP7Pro-ALL.zip/download), wait a few minutes for the file to appear!"
+              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/OPHydro-8.zip/download), wait a few minutes for the file to appear!"
