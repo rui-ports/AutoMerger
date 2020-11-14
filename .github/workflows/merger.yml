@@ -2,7 +2,7 @@ name: Merge Action
 
 on: [push]
 env:
-   INPUT: "MIUI 20.11.12"
+   INPUT: "MIUI 12.0.2.0"
 
 jobs:
   build:
@@ -53,7 +53,7 @@ jobs:
               git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'https://bigota.d.miui.com/20.11.12/miui_CMI_20.11.12_241f432d92_11.0.zip' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://bigota.d.miui.com/V12.0.2.0.QJWMIXM/miui_CURTANAGlobal_V12.0.2.0.QJWMIXM_2870fe290a_10.0.zip' -O zip.zip > /dev/null 2>&1
               
               if [ -f "$(pwd)/zip.zip" ]; then
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
@@ -71,7 +71,7 @@ jobs:
               fi
 
               sudo chmod 0644 system.img.zip
-              mv system.img.zip MIUI.bin
+              mv system.img.zip curtana.zip
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -81,7 +81,7 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put MIUI.bin\r\"
+              send \"put curtana.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
