@@ -2,7 +2,7 @@ name: Merge Action
 
 on: [push]
 env:
-   INPUT: "RogUI 3"
+   INPUT: "MIUI (Joyeuse)"
 
 jobs:
   build:
@@ -53,7 +53,7 @@ jobs:
               git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'https://dlcdnets.asus.com/pub/ASUS/ZenFone/ZS661KS/UL-ASUS_I003_1-ASUS-17.0823.2009.98-1.1.74-user.zip' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://bigota.d.miui.com/V12.0.1.0.QJZEUXM/joyeuse_eea_global_images_V12.0.1.0.QJZEUXM_20201110.0000.00_10.0_eea_e0d52821f9.tgz' -O zip.zip > /dev/null 2>&1
               
               if [ -f "$(pwd)/zip.zip" ]; then
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
@@ -71,7 +71,7 @@ jobs:
               fi
 
               sudo chmod 0644 system.img.zip
-              mv system.img.zip RogUI.zip
+              mv system.img.zip MIUI-J.zip
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -81,7 +81,7 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put RogUI.zip\r\"
+              send \"put MIUI-J.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
