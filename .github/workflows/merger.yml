@@ -2,7 +2,7 @@ name: Merge Action
 
 on: [push]
 env:
-   INPUT: "MIUI (Joyeuse)"
+   INPUT: "ZUI"
 
 jobs:
   build:
@@ -50,14 +50,15 @@ jobs:
          continue-on-error: true
          run: |
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Cloning the repository..."
-              git clone --recurse-submodules https://github.com/Treble-Experience/S_EXT-P-Merger.git
+              git clone --recurse-submodules https://github.com/YuMiGSIs/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'https://bigota.d.miui.com/V12.0.1.0.QJZEUXM/joyeuse_eea_global_images_V12.0.1.0.QJZEUXM_20201110.0000.00_10.0_eea_e0d52821f9.tgz' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://mva1.androidfilehost.com/dl/wERYDcOMa4YUWp3mJl5Rdw/1605699068/8889791610682943848/%5Bup_vnROM.net%5D_L79031_ROW_SECURE_USER_Q00114.1a_Q_ROW_12.0.151_ST_200826_qpst.zip' -O zip.zip > /dev/null 2>&1
               
               if [ -f "$(pwd)/zip.zip" ]; then
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
-                  sudo bash merger.sh "$(pwd)/zip.zip"
+                  unzip zip.zip
+                  sudo bash unzip.sh "$(pwd)/zip.zip"
               else
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: The firmware/ROM file was not found"
                   exit 1
@@ -71,7 +72,7 @@ jobs:
               fi
 
               sudo chmod 0644 system.img.zip
-              mv system.img.zip MIUI-J.zip
+              mv system.img.zip ZUI-CN.zip
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -81,7 +82,7 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put MIUI-J.zip\r\"
+              send \"put ZUI-CN.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
