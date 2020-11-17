@@ -53,7 +53,7 @@ jobs:
               git clone --recurse-submodules https://github.com/YuMiGSIs/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'https://mva1.androidfilehost.com/dl/wERYDcOMa4YUWp3mJl5Rdw/1605699068/8889791610682943848/%5Bup_vnROM.net%5D_L79031_ROW_SECURE_USER_Q00114.1a_Q_ROW_12.0.151_ST_200826_qpst.zip' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://mirrors.lolinet.com/firmware/lenovo/l79031/L79031_CN_SECURE_USER_Q00029.1_Q_ZUI_12.0.237_ST_200808_qpst.zip' -O zip.zip > /dev/null 2>&1
               
               if [ -f "$(pwd)/zip.zip" ]; then
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
@@ -72,7 +72,7 @@ jobs:
               fi
 
               sudo chmod 0644 system.img.zip
-              mv system.img.zip ZUI-CN.zip
+              mv system.img.zip ZUI-CN2.zip
               expect -c "
               spawn sftp pything@frs.sourceforge.net
               expect \"yes/no\"
@@ -82,10 +82,10 @@ jobs:
               expect \"sftp> \"
               send \"cd /home/pfs/project/yumi-project/dumps\r\"
               set timeout -1
-              send \"put ZUI-CN.zip\r\"
+              send \"put ZUI-CN2.zip\r\"
               expect \"Uploading\"
               expect \"100%\"
               expect \"sftp>\"
               send \"bye\r\"
               interact"
-              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/MIUI.bin/download), wait a few minutes for the file to appear!"
+              ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Uploaded! The file is available on [SourceForge](https://sourceforge.net/projects/yumi-project/files/dumps/ZUI-CN2.zip/download), wait a few minutes for the file to appear!"
