@@ -58,7 +58,7 @@ jobs:
               if [ -f "$(pwd)/zip.zip" ]; then
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
                   unzip zip.zip
-                  sudo bash unzip.sh "$(pwd)/zip.zip"
+                  sudo bash zui.sh "$(pwd)/zip.zip"
               else
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: The firmware/ROM file was not found"
                   exit 1
