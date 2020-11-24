@@ -2,7 +2,7 @@ name: Merge Action
 
 on: [push]
 env:
-   INPUT: "ZUI"
+   INPUT: "OxygenOS"
 
 jobs:
   build:
@@ -52,12 +52,12 @@ jobs:
               git clone --recurse-submodules https://github.com/YuMiGSIs/S_EXT-P-Merger.git
               cd S_*
               ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Downloading the firmware/ROM"
-              sudo wget 'https://mirrors.lolinet.com/firmware/lenovo/l79031/L79031_ROW_SECURE_USER_Q00114.1a_Q_ROW_12.0.201_ST_200929_qpst.zip' -O zip.zip > /dev/null 2>&1
+              sudo wget 'https://tdrive.elytra8.workers.dev/OnePlus8THydrogen_15.H.19_OTA_0190_all_2011100104_d71268e8fd2942fd.zip' -O zip.zip > /dev/null 2>&1
               
               if [ -f "$(pwd)/zip.zip" ]; then
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: Merging, this can take a while"
                   unzip zip.zip
-                  sudo bash zui.sh "$(pwd)/zip.zip"
+                  sudo bash merger.sh "$(pwd)/zip.zip" -odm -ext -product -overlays -opproduct
               else
                   ~/tmp/telegram -M "⚒ ***Auto Merger***: $INPUT: The firmware/ROM file was not found"
                   exit 1
